@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苏州嘉励相机替换助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f8961e;
+            --error-color: #f72585;
+            --gray-color: #6c757d;
+            --border-color: #dee2e6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Logo样式 */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        
+        .logo {
+            height: 60px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+        
+        /* 为header添加左侧内边距，为logo腾出空间 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 25px 30px 100px; /* 左侧内边距增加 */
+            text-align: center;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            padding: 25px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: var(--light-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            font-size: 1.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+        
+        .brand-selection {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: end;
+        }
+        
+        .brand-selection .form-group {
+            margin-bottom: 0;
+        }
+        
+        .swap-icon {
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 10px;
+            background: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .swap-icon:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: rotate(180deg);
+        }
+        
+        .target-brand-display {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .parameters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .camera-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .camera-type-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background-color: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--gray-color);
+        }
+        
+        .camera-type-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 14px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+        }
+        
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button.reset {
+            background-color: var(--gray-color);
+            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        }
+        
+        button.reset:hover {
+            background-color: #5a6268;
+        }
+        
+        .result-container {
+            margin-top: 20px;
+        }
+        
+        .match-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .match-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .match-item h3 {
+            color: var(--success-color);
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .match-score {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgba(76, 201, 240, 0.1);
+            color: var(--success-color);
+        }
+        
+        .parameter-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .parameter-section {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 15px;
+            background: white;
+        }
+        
+        .parameter-section h4 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+        
+        .parameter-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .parameter-row:last-child {
+            border-bottom: none;
+        }
+        
+        .parameter-name {
+            font-weight: 500;
+            width: 40%;
+        }
+        
+        .parameter-value {
+            color: var(--dark-color);
+            width: 60%;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .no-match {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .compatibility {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            gap: 4px;
+        }
+        
+        .compatible {
+            background-color: rgba(76, 201, 240, 0.1);
+            color: var(--success-color);
+        }
+        
+        .incompatible {
+            background-color: rgba(247, 37, 133, 0.1);
+            color: var(--error-color);
+        }
+        
+        .communication-needed {
+            background-color: rgba(248, 150, 30, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .close-match {
+            border-left: 5px solid var(--warning-color);
+        }
+        
+        .close-match h3 {
+            color: var(--warning-color);
+        }
+        
+        .failure-analysis {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        
+        .failure-analysis h3 {
+            color: var(--error-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .failure-list {
+            list-style-type: none;
+        }
+        
+        .failure-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .failure-item:last-child {
+            border-bottom: none;
+        }
+        
+        .failure-item i {
+            color: var(--error-color);
+        }
+        
+        .suggestions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .suggestions h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .suggestion-list {
+            list-style-type: none;
+        }
+        
+        .suggestion-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .suggestion-item i {
+            color: var(--accent-color);
+        }
+        
+        .usage-tip {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--gray-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .usage-tip i {
+            color: var(--accent-color);
+            margin-top: 2px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .param-info {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 5px;
+            color: var(--gray-color);
+            cursor: help;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 20px;
+        }
+        
+        .quick-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .quick-action-btn {
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .quick-action-btn:hover {
+            background-color: var(--light-color);
+            border-color: var(--primary-color);
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal-icon {
+            font-size: 48px;
+            color: var(--warning-color);
+            margin-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .modal-message {
+            margin-bottom: 20px;
+            color: var(--gray-color);
+            line-height: 1.5;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .modal-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .modal-btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .modal-btn-secondary {
+            background-color: var(--gray-color);
+            color: white;
+        }
+        
+        .modal-btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        /* 复制按钮样式 */
+        .copy-btn {
+            padding: 6px 12px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copy-btn.copied {
+            background-color: var(--success-color);
+        }
+        
+        /* 分辨率输入框样式 */
+        .resolution-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resolution-input-group input {
+            flex: 1;
+        }
+        
+        .resolution-separator {
+            font-weight: bold;
+            color: var(--gray-color);
+            margin: 0 5px;
+        }
+        
+        /* 靶面尺寸模式切换器 */
+        .target-size-mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: white;
+            padding: 5px;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .target-size-mode-btn {
+            flex: 1;
+            padding: 10px 15px;
+            background-color: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        .target-size-mode-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* 靶面尺寸输入框样式 */
+        .target-size-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .target-size-input-group input {
+            flex: 1;
+        }
+        
+        .target-size-separator {
+            font-weight: bold;
+            color: var(--gray-color);
+            margin: 0 5px;
+        }
+        
+        .target-size-preset {
+            margin-top: 10px;
+        }
+        
+        /* 参数部分按钮样式 */
+        .params-action-buttons {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        /* 错误提示样式 */
+        .error-container {
+            display: none;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(247, 37, 133, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--error-color);
+        }
+        
+        .error-container h4 {
+            color: var(--error-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .error-list {
+            list-style-type: none;
+        }
+        
+        .error-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .error-item i {
+            color: var(--error-color);
+        }
+        
+        .input-error {
+            border-color: var(--error-color) !important;
+            box-shadow: 0 0 0 3px rgba(247, 37, 133, 0.2) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-container {
+                position: static;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            header {
+                padding: 20px 15px;
+                min-height: auto;
+            }
+            
+            .brand-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            .swap-icon {
+                transform: rotate(90deg);
+                margin: 10px auto;
+            }
+            
+            .parameters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .parameter-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .camera-type-selector {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .target-size-mode-selector {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            button {
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .quick-action-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .params-action-buttons {
+                flex-direction: column;
+            }
+            
+            .resolution-input-group,
+            .target-size-input-group {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .resolution-separator,
+            .target-size-separator {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo容器 -->
+        <div class="logo-container">
+            <!-- 这里使用占位符logo，实际使用时替换为"嘉励Logo-纵向-白色.png" -->
+            <img src="./嘉励Logo-纵向-白色.png" alt="嘉励Logo" class="logo">
+        </div>
+        
+        <header>
+            <h1><i class="fas fa-camera-retro"></i> 苏州嘉励相机替换助手</h1>
+            <p class="description">选择源相机或手动输入参数，系统将智能推荐兼容的嘉励相机替换型号</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="section">
+                <h2><i class="fas fa-camera"></i> 相机类型与品牌选择</h2>
+                
+                <div class="camera-type-selector">
+                    <div class="camera-type-btn active" data-type="area">
+                        <i class="fas fa-border-all"></i> 面阵相机
+                    </div>
+                    <div class="camera-type-btn" data-type="line">
+                        <i class="fas fa-grip-lines"></i> 线扫相机
+                    </div>
+                </div>
+                
+                <!-- 将型号输入放在第二行 -->
+                <div class="form-group">
+                    <label for="source-model">
+                        <i class="fas fa-list"></i> 源相机型号（可选）
+                    </label>
+                    <input type="text" id="source-model" placeholder="输入或选择相机型号" list="model-suggestions">
+                    <datalist id="model-suggestions">
+                        <!-- 型号建议将通过JavaScript动态填充 -->
+                    </datalist>
+                </div>
+                
+                <div class="brand-selection">
+                    <div class="form-group">
+                        <label for="source-brand">
+                            <i class="fas fa-camera"></i> 源相机品牌（可选）
+                        </label>
+                        <select id="source-brand">
+                            <option value="">-- 请选择源品牌（可选） --</option>
+                            <option value="hikvision">海康相机</option>
+                            <option value="huarui">华睿相机</option>
+                            <option value="jiali">嘉励相机</option>
+                            <!-- 面阵相机中移除埃科 -->
+                        </select>
+                    </div>
+                    
+                    <div class="swap-icon" id="swap-brands">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="target-brand-display">
+                            <i class="fas fa-bullseye"></i> 目标替换品牌：嘉励相机
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-action-buttons">
+                    <button id="replace-btn">
+                        <i class="fas fa-search"></i> 查找替换相机
+                    </button>
+                    <button id="reset-btn" class="reset">
+                        <i class="fas fa-redo"></i> 重置参数
+                    </button>
+                </div>
+                
+                <div class="usage-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>使用提示：</strong> 您可以选择源相机型号自动填充参数，或者直接在下方手动输入参数。系统将根据参数匹配度推荐最合适的嘉励相机替换型号。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="params-section">
+                <h2><i class="fas fa-sliders-h"></i> 相机参数设置</h2>
+                
+                <!-- 错误提示容器 -->
+                <div class="error-container" id="error-container">
+                    <h4><i class="fas fa-exclamation-triangle"></i> 请完善以下参数</h4>
+                    <ul class="error-list" id="error-list">
+                        <!-- 错误列表将动态生成 -->
+                    </ul>
+                </div>
+                
+                <div class="parameters-grid">
+                    <div class="form-group">
+                        <label for="pixel">
+                            像素（<span id="pixel-unit">万</span>）
+                            <span class="param-info" title="相机传感器的总像素数量">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="pixel" placeholder="例如: 40">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pixel-size">
+                            像元尺寸
+                            <span class="param-info" title="单个像素的物理尺寸">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="pixel-size" placeholder="例如: 6.9μm">
+                    </div>
+                    <div class="form-group">
+                        <label for="shutter-type">
+                            快门类型
+                            <span class="param-info" title="相机曝光控制方式">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="shutter-type">
+                            <option value="">-- 请选择 --</option>
+                            <option value="Global">全局快门</option>
+                            <option value="Rolling">卷帘快门</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="resolution">
+                            分辨率
+                            <span class="param-info" title="图像的水平与垂直像素数量">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <div class="resolution-input-group">
+                            <input type="text" id="resolution-width" placeholder="宽">
+                            <span class="resolution-separator">×</span>
+                            <input type="text" id="resolution-height" placeholder="高">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="max-frame-rate">
+                            最大<span id="frame-rate-label">帧率</span>
+                            <span class="param-info" title="相机每秒可采集的最大图像数量">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" id="max-frame-rate" placeholder="例如: 125.2 fps">
+                    </div>
+                    <div class="form-group">
+                        <label for="data-interface">
+                            数据接口
+                            <span class="param-info" title="相机与计算机的连接接口类型">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="data-interface">
+                            <option value="">-- 请选择 --</option>
+                            <option value="GigE">GigE</option>
+                            <option value="10GigE">10GigE</option>
+                            <option value="USB3.0">USB3.0</option>
+                            <option value="Camera Link">Camera Link</option>
+                            <option value="CXP6">CXP6</option>
+                            <option value="CXP10">CXP10</option>
+                            <option value="CXP12">CXP12</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">
+                            黑白｜彩色
+                            <span class="param-info" title="相机色彩模式">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="color">
+                            <option value="">-- 请选择 --</option>
+                            <option value="黑白">黑白</option>
+                            <option value="彩色">彩色</option>
+                            <option value="黑白-近红外">黑白-近红外</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lens-interface">
+                            镜头接口
+                            <span class="param-info" title="相机与镜头的连接接口类型">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <select id="lens-interface">
+                            <option value="">-- 请选择 --</option>
+                            <option value="C-Mount">C-Mount</option>
+                            <option value="M42">M42</option>
+                            <option value="M58">M58</option>
+                            <option value="M72">M72</option>
+                            <option value="M90">M90</option>
+                            <option value="M95">M95</option>
+                        </select>
+                    </div>
+					
+					                    <div class="form-group">
+                        <label for="target-size">
+                            靶面尺寸
+                            <span class="param-info" title="相机传感器的物理尺寸">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        
+                        <!-- 靶面尺寸模式切换器 -->
+                        <div class="target-size-mode-selector">
+                            <div class="target-size-mode-btn active" data-mode="small">
+                                <i class="fas fa-expand-alt"></i> 小靶面
+                            </div>
+                            <div class="target-size-mode-btn" data-mode="large">
+                                <i class="fas fa-expand-arrows-alt"></i> 大靶面
+                            </div>
+                        </div>
+                        
+                        <!-- 小靶面模式 -->
+                        <div class="target-size-input-group small-mode">
+                            <input type="text" id="target-size-small" placeholder="例如: 1/2.9">
+                        </div>
+                        
+                        <!-- 大靶面模式 -->
+                        <div class="target-size-input-group large-mode" style="display: none;">
+                            <input type="text" id="target-size-width" placeholder="宽(如23.0)">
+                            <span class="target-size-separator">×</span>
+                            <input type="text" id="target-size-height" placeholder="高(如23.0)">
+                        </div>
+                        
+                        <div class="target-size-preset">
+                            <small>提示：小靶面格式如1/2.9，大靶面格式如23.0×23.0</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 在参数部分添加查找替换相机按钮 -->
+                <div class="params-action-buttons">
+                    <button id="replace-btn-params">
+                        <i class="fas fa-search"></i> 查找替换相机
+                    </button>
+                    <button id="reset-params-btn" class="reset">
+                        <i class="fas fa-redo"></i> 重置参数
+                    </button>
+                </div>
+            </div>
+            
+            <div class="section" id="result-section">
+                <h2><i class="fas fa-clipboard-list"></i> 替换结果</h2>
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在查找最佳匹配相机...</p>
+                </div>
+                <div class="result-container" id="result-container">
+                    <p class="no-match">
+                        <i class="fas fa-info-circle"></i><br>
+                        请输入参数后点击"查找替换相机"
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>苏州嘉励自动化科技有限公司 &copy; 2025 | 嘉励相机替换助手</p>
+        </footer>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="model-not-found-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="modal-title">型号未找到</h3>
+            <p class="modal-message">
+                您输入的相机型号暂未在数据库里，请联系管理员或者尝试输入相机的参数来得到匹配的相机。
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" id="modal-ok-btn">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+const cameraBrands = {
+            // 面阵相机数据
+            area: {
+                hikvision: {
+                    name: "海康面阵相机",
+                    cameras: [
+                        { model: "MV-CS004-10GM", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720 × 540", maxFrameRate: "125.2 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS004-10GC", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720 × 540", maxFrameRate: "125.2 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS004-11GM", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720 × 540", maxFrameRate: "312.9 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS004-11GC", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720 × 540", maxFrameRate: "312.9 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS013-60GN", pixel: "130", targetSize: "2/3", pixelSize: "6.9μm", shutterType: "Global", resolution: "1224 × 1024", maxFrameRate: "59.2 fps", dataInterface: "GigE", color: "黑白-近红外", lensInterface: "C-Mount" },
+                        { model: "MV-CS016-10GM", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440 × 1080", maxFrameRate: "65.2 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS016-10GC", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440 × 1080", maxFrameRate: "65.2 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS016-11GM", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440 × 1080", maxFrameRate: "78.2 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS020-10GM", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624 × 1240", maxFrameRate: "60 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS020-10GC", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624 × 1240", maxFrameRate: "60 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS020-60GM", pixel: "200", targetSize: "1/2.53", pixelSize: "3.45μm", shutterType: "Global", resolution: "1632 × 1264", maxFrameRate: "60 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS020-60GC", pixel: "200", targetSize: "1/2.53", pixelSize: "3.45μm", shutterType: "Global", resolution: "1632 × 1264", maxFrameRate: "60 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS023-10GM", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920 × 1200", maxFrameRate: "41 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS023-10GC", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920 × 1200", maxFrameRate: "41 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS032-60GM", pixel: "320", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048 × 1536", maxFrameRate: "36.8 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS032-60GC", pixel: "320", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048 × 1536", maxFrameRate: "36.8 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-10GM", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "24.2 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-10GC", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "24.2 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-10GM-PRO", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "35.6 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-10GC-PRO", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "35.6 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-20GM", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592 × 2048", maxFrameRate: "22.7 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-20GC", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592 × 2048", maxFrameRate: "22.7 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-60GM", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "23 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-60GC", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "23 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-60GN", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "23 fps", dataInterface: "GigE", color: "黑白-近红外", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-90GM", pixel: "500", targetSize: "2/3", pixelSize: "3.4μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "24.2 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS050-90GC", pixel: "500", targetSize: "2/3", pixelSize: "3.4μm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "24.2 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS060-10GM", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "19.1 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS060-10GC", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "19.1 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS060-10GM-PRO", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "30.7 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS060-10GC-PRO", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "30.7 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "MV-CS200-10GM", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472 × 3648", maxFrameRate: "5.9 fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "MV-CS200-10GC", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472 × 3648", maxFrameRate: "5.9 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" }
+                    ]
+                },
+                // 华睿面阵相机数据
+				huarui: {
+					name: "华睿面阵相机",
+					cameras: [
+						// 从Excel表格转换的数据
+						{ model: "A7040MK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7040CK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5201MK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5201CK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7300MK200", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "188", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500MK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MK402", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "37.2", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CK401", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "27", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A21MK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A21CK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A21MK200", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "56", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5B57MK200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3B00MG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "10", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3B00CG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "10", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7040MG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "315", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7040CG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "315", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7040MG001", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "123", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7040CG001", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "123", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7160MG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "135", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7160CG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "135", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7160MG001", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "65.2", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7160CG001", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "65.2", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5200MG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "86.8", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5200CG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "86.8", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5207MG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "81", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5207CG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "81", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7500MG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "36", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7500CG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "36", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7900MG000", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "22", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7900CG000", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "22", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7A20MG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "16", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7A20CG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "16", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B0AMG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "8", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B0ACG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "8", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B4AMG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "7", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B4ACG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "7", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "7", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "7", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH3600MG000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3600CG000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH3A20MG000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3A20CG000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH3B00MG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3B00CG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7040MG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7040CG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7160MG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7160CG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5200MG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5200CG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5207MG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5207CG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7500MG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7500CG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7A20MG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7A20CG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B0AMG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B0ACG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B4AMG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B4ACG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5B57MGV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5B57CGV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5051MG545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5051CG545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3135MG000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3135CG000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3138MG000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3138CG000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3139MG000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3139CG000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5131MU001", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5131MU210", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "208", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5131CU210", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "208", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7160MG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7160CG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5200MG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5200CG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5201MG150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5201CG150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7200MG001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7200CG001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7200MG130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7200CG130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7230MG000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7230CG000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7201MG000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7201CG000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7300CU001", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "55", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7300MG90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7300CG90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5402MG90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5402CG90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5501MG60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5501CG60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MG35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CG35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500CU201", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MG75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CG75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7501MU001", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "43", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7501MG000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7501CG000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A780AMU000", pixel: "800", targetSize: "2/3", pixelSize: "2.74μm", shutterType: "Global", resolution: "2840×2840", maxFrameRate: "47", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900MG200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CG200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7900MG201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CG201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MG201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CG201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A21MU200", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "28.6", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A2AMU000", pixel: "1200", targetSize: "1/1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "31", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MG30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CG30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AX7A20MG250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX7A20CG250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AX5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AX5B57MG250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5B57CG250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5B51MG250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5B51CG250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5E07MG250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5E07CG250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5F57MG250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5F57CG250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5K37MT250", pixel: "10300", targetSize: "36.1×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "11264×9200", maxFrameRate: "11.25", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX7Q27MG470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+						{ model: "AX7Q27CG470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "彩色", lensInterface: "M72" }
+					]
+				},
+                jiali: {
+                    name: "嘉励面阵相机",
+                    cameras: [
+                        { model: "JL-RCG-13992-GM", pixel: "139", targetSize: "1/2", pixelSize: "4.8µm", shutterType: "Global", resolution: "1280 × 1024", maxFrameRate: "92fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-13992-GC", pixel: "139", targetSize: "1/2", pixelSize: "4.8µm", shutterType: "Global", resolution: "1280 × 1024", maxFrameRate: "92fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-13892-GM", pixel: "138", targetSize: "1/2.7", pixelSize: "4µm", shutterType: "Global", resolution: "1280 × 1024", maxFrameRate: "92fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-13892-GC", pixel: "138", targetSize: "1/2.7", pixelSize: "4µm", shutterType: "Global", resolution: "1280 × 1024", maxFrameRate: "92fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-20060-GM", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5µm", shutterType: "Global", resolution: "1624 × 1240", maxFrameRate: "60fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-20060-GC", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5µm", shutterType: "Global", resolution: "1624 × 1240", maxFrameRate: "60fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-23038-GM", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86µm", shutterType: "Global", resolution: "1920 × 1200", maxFrameRate: "38fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-30038-GM", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45µm", shutterType: "Global", resolution: "2048 × 1536", maxFrameRate: "38fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-30038-GC", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45µm", shutterType: "Global", resolution: "2048 × 1536", maxFrameRate: "38fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-50423-GM", pixel: "504", targetSize: "1/2.5", pixelSize: "2.2µm", shutterType: "Rolling", resolution: "2592 × 1944", maxFrameRate: "23fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-50423-GC", pixel: "504", targetSize: "1/2.5", pixelSize: "2.2µm", shutterType: "Rolling", resolution: "2592 × 1944", maxFrameRate: "23fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-50423-GM-NPOE", pixel: "504", targetSize: "1/2.5", pixelSize: "2.2µm", shutterType: "Rolling", resolution: "2592 × 1944", maxFrameRate: "23fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-50423-GC-NPOE", pixel: "504", targetSize: "1/2.5", pixelSize: "2.2µm", shutterType: "Rolling", resolution: "2592 × 1944", maxFrameRate: "23fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-50023-GM", pixel: "500", targetSize: "2/3", pixelSize: "3.45µm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "23fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-50023-GC", pixel: "500", targetSize: "2/3", pixelSize: "3.45µm", shutterType: "Global", resolution: "2448 × 2048", maxFrameRate: "23fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-63019-GM", pixel: "630", targetSize: "1/1.8", pixelSize: "2.4µm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "19fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-63019-GC", pixel: "630", targetSize: "1/1.8", pixelSize: "2.4µm", shutterType: "Rolling", resolution: "3072 × 2048", maxFrameRate: "19fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-89013-GM", pixel: "890", targetSize: "1", pixelSize: "3.45µm", shutterType: "Global", resolution: "4096 × 2160", maxFrameRate: "13fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-89013-GC", pixel: "890", targetSize: "1", pixelSize: "3.45µm", shutterType: "Global", resolution: "4096 × 2160", maxFrameRate: "13fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-100010-GM", pixel: "1000", targetSize: "1/2.3", pixelSize: "1.67µm", shutterType: "Rolling", resolution: "3840 × 2748", maxFrameRate: "10fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-120010-GM", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85µm", shutterType: "Rolling", resolution: "4000 × 3000", maxFrameRate: "10fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-120010-GC", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85µm", shutterType: "Rolling", resolution: "4000 × 3000", maxFrameRate: "10fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-120009-GM", pixel: "1200", targetSize: "1.1", pixelSize: "3.45µm", shutterType: "Global", resolution: "4096 × 3000", maxFrameRate: "9fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-120009-GC", pixel: "1200", targetSize: "1.1", pixelSize: "3.45µm", shutterType: "Global", resolution: "4096 × 3000", maxFrameRate: "9fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-200006-GM", pixel: "2000", targetSize: "1", pixelSize: "2.4µm", shutterType: "Rolling", resolution: "5472 × 3648", maxFrameRate: "6fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCS-200006-GC", pixel: "2000", targetSize: "1", pixelSize: "2.4µm", shutterType: "Rolling", resolution: "5472 × 3648", maxFrameRate: "6fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-250004-GM", pixel: "2500", targetSize: "1.1", pixelSize: "2.5µm", shutterType: "Global", resolution: "5120 × 5120", maxFrameRate: "4fps", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-RCG-250004-GC", pixel: "2500", targetSize: "1.1", pixelSize: "2.5µm", shutterType: "Global", resolution: "5120 × 5120", maxFrameRate: "4fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" }
+                    ]
+                }
+            },
+            // 线扫相机数据
+            line: {
+                hikvision: {
+                    name: "海康线扫相机",
+                    cameras: [
+                        { model: "MV-CL022-91GM", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "100 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL022-91GC", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 2", maxFrameRate: "40 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL024-91GM", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 2", maxFrameRate: "86 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL024-91GC", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 3", maxFrameRate: "70 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL042-91GM", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "80 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL042-91GM-PL", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "28 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL042-91GC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "80 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL042-91GC-PL", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "28 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL043-A1GM-V2", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "28 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL043-A1GC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "40 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL082-92GM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "50 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "MV-CL083-92GC", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "33 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M72" },
+                        { model: "MV-CL084-91GM", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "29.8 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "MV-CL086-91GC", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "40 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M72" },
+                        { model: "MV-CL042-91CM", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL042-91CM-V2", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "195 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "MV-CL042-91CC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+                        { model: "MV-CL082-92CM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "MV-CL083-92CC", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "66.6 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "MV-CL084-91CM", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "100kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "MV-CL086-91CC", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "33.7 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "MV-CL084-91CM-PRO", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 16", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "MV-CL086-91CC-PRO", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 12", maxFrameRate: "34 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "MV-CL162-91CM", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 2", maxFrameRate: "120 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" }
+                    ]
+                },
+                jiali: {
+                    name: "嘉励线扫相机",
+                    cameras: [
+                        { model: "JL-LSC-02K49M-GV", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "49 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "JL-LSC-02K49C-GV", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "49 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "JL-LSC-02K59M-GV", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 4", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-LSC-02K59C-GV", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 4", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-LSC-04K28M-GV", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "28 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "JL-LSC-04K28C-GV", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "28 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "JL-LSC-04K29M-GV", pixel: "4", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "29 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "JL-LSC-04K29C-GV", pixel: "4", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "29 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "JL-LSC-08K13M-GV", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "13 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "JL-LSC-04K180M-CL", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "180 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "JL-LSC-04K180C-CL", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "180 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+                        { model: "JL-LSC-08K80M-CL", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "80 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "JL-LSC-16K50M-CL", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "50 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" }
+                    ]
+                },
+                aike: {
+                    name: "埃科线阵相机",
+                    cameras: [
+                        { model: "PA2KGV-80KM", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "80K", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "PN2KGV-48KC", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 3", maxFrameRate: "47.8K", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "PN2KGV-60KM", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "59.9K", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "PN2KGV-140KM", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "140K", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "PN2KCL-92KT4", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 4", maxFrameRate: "92K", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "PN2KCL-113KC", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 3", maxFrameRate: "113.6K", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
+                        { model: "PN2KCL-400KM", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "400K", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "PN2KU30-180KM", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "181.4K", dataInterface: "USB3.0", color: "黑白", lensInterface: "M42" },
+                        { model: "PN2KU30-180KN", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "181.4K", dataInterface: "USB3.0", color: "黑白", lensInterface: "M42" },
+                        { model: "PA4KGV-80KM", pixel: "4", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "4096 × 1", maxFrameRate: "80K", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
+                        { model: "PL4KGV-30KC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "30K", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "PL4KGV-68KT", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "68K", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "PL4KCL-68KC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "68K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+                        { model: "PL4KCL-200KT", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "200K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "PN4KGV-10KC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "10K", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+                        { model: "PN4KGV-30KM4", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 4", maxFrameRate: "30K", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+                        { model: "PN4KCL-180KM", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 1", maxFrameRate: "178.6K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "PN4KCL-46KC", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "46K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+                        { model: "PN4KCL-30KM4", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 4", maxFrameRate: "30K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "PH4KCL-200KT", pixel: "4", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "4096 × 256", maxFrameRate: "200K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "PH4KCL-200KU", pixel: "4", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "4096 × 256", maxFrameRate: "200K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+                        { model: "PH4KXP-250KT256", pixel: "4", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "4096 × 256", maxFrameRate: "250K", dataInterface: "CXP6", color: "黑白", lensInterface: "M42" },
+                        { model: "PH4KXP-250KN256", pixel: "4", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "4096 × 256", maxFrameRate: "250K", dataInterface: "CXP6", color: "黑白", lensInterface: "M42" },
+                        { model: "PABKGV-45KM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "45K", dataInterface: "GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PABKXGV-80KM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "80K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PABKCL-80KM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "80K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PL8KCL-100KT", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8320 × 8", maxFrameRate: "100K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PL8KCL-50KX", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8320 × 16", maxFrameRate: "50K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PL8KCL-30KC", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8320 × 12", maxFrameRate: "43K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "PL8KCL-30KF", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8320 × 16", maxFrameRate: "43K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "PL8KCXP-43KC", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8320 × 12", maxFrameRate: "43K", dataInterface: "CXP6", color: "彩色", lensInterface: "M72" },
+                        { model: "PN8KXGV-150KM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "150K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KXGV-80KT", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "80K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KXGV-50KC", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "50K", dataInterface: "10GigE", color: "彩色", lensInterface: "M72" },
+                        { model: "PN8KXGV-50KT4", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "50K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCL-80KT", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "79.4K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCL-50KT4", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "50K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCL-33KC", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "33.3K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "PN8KCL-33KC2", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "33.3K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+                        { model: "PN8KCXP10-220KM", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "222.2K", dataInterface: "CXP10", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCXP10-80KT", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "79.4K", dataInterface: "CXP10", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCXP10-62KC", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "62.1K", dataInterface: "CXP10", color: "彩色", lensInterface: "M72" },
+                        { model: "PN8KCXP10-50KT4", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "50K", dataInterface: "CXP10", color: "黑白", lensInterface: "M72" },
+                        { model: "PN8KCXP10-37KC2", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "37.6K", dataInterface: "CXP10", color: "彩色", lensInterface: "M72" },
+                        { model: "PH8KCXP-250KT", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 256", maxFrameRate: "284K", dataInterface: "CXP6", color: "黑白", lensInterface: "M72" },
+                        { model: "TPH8KCXP-250KT", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 256", maxFrameRate: "250K", dataInterface: "CXP6", color: "黑白", lensInterface: "M72" },
+                        { model: "PA16KXGV-75KM", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "74.8K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PA16KCL-40KM", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "51K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PA16KCXP-80KM", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "80K", dataInterface: "CXP6", color: "黑白", lensInterface: "M72" },
+                        { model: "PN16KXGV-75KM", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "74.9K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PN16KXGV-48KT", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 2", maxFrameRate: "48K", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+                        { model: "PN16KCL-50KT", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 2", maxFrameRate: "50K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+                        { model: "PR16KCL-51KT", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 2", maxFrameRate: "51K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M90" },
+                        { model: "PR16KCL-51KT4", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 4", maxFrameRate: "51K", dataInterface: "Camera Link", color: "黑白", lensInterface: "M90" },
+                        { model: "PR16KCL-17KC", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 3", maxFrameRate: "17K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M90" },
+                        { model: "PR16KCL-17KC2", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 6", maxFrameRate: "17K", dataInterface: "Camera Link", color: "彩色", lensInterface: "M90" },
+                        { model: "PR16KCXP-25KC2", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 6", maxFrameRate: "24.9K", dataInterface: "CXP6", color: "彩色", lensInterface: "M90" },
+                        { model: "PR16KCXP10-80KT", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 2", maxFrameRate: "89.7K", dataInterface: "CXP10", color: "黑白", lensInterface: "M90" },
+                        { model: "PR16KCXP10-50KT4", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 4", maxFrameRate: "55.2K", dataInterface: "CXP10", color: "黑白", lensInterface: "M90" },
+                        { model: "PR16KCXP10-70KC", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 3", maxFrameRate: "68.4K", dataInterface: "CXP10", color: "彩色", lensInterface: "M90" },
+                        { model: "PR16KCXP10-40KC", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 6", maxFrameRate: "39.8K", dataInterface: "CXP10", color: "彩色", lensInterface: "M90" },
+                        { model: "PH16KCXP12-250KT", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 256", maxFrameRate: "250K", dataInterface: "CXP12", color: "黑白", lensInterface: "M95" },
+                        { model: "TPH16KCXP12-250KT", pixel: "16", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "16384 × 256", maxFrameRate: "250K", dataInterface: "CXP12", color: "黑白", lensInterface: "M95" }
+                    ]
+                },
+				
+				huarui: {
+					name: "华睿线扫相机",
+					cameras: [
+						{ model: "L5027MG400", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 4", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "C" },
+						{ model: "L5027CG300", pixel: "2", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "2048 × 3", maxFrameRate: "44.7 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "C" },
+						{ model: "L5047MG100", pixel: "4", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "58 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "C" },
+						{ model: "L5047MG440", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 4", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+						{ model: "L5047CG440", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+						{ model: "L5027MG140", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 1", maxFrameRate: "63 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+						{ model: "L5027CG140", pixel: "2", targetSize: "", pixelSize: "14μm", shutterType: "Global", resolution: "2048 × 2", maxFrameRate: "63 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+						{ model: "L5047MG140", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M42" },
+						{ model: "L5047CG140", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "59 kHz", dataInterface: "GigE", color: "彩色", lensInterface: "M42" },
+						{ model: "L5082MG170", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "30 kHz", dataInterface: "GigE", color: "黑白", lensInterface: "M72" },
+						{ model: "L5087MT270", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 2", maxFrameRate: "148.8 kHz", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+						{ model: "L5087CT370", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 3", maxFrameRate: "48 kHz", dataInterface: "10GigE", color: "彩色", lensInterface: "M72" },
+						{ model: "L5047MK141", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "180 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M42" },
+						{ model: "L5047CK141", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 2", maxFrameRate: "92 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+						{ model: "L5047CK440", pixel: "4", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "4096 × 3", maxFrameRate: "66 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M42" },
+						{ model: "L5082MK170", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 1", maxFrameRate: "80 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+						{ model: "L5087MK470", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+						{ model: "L5087CK670", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "33 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+						{ model: "L5087MKA70", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+						{ model: "L5087CKA70", pixel: "8", targetSize: "", pixelSize: "5μm", shutterType: "Global", resolution: "8192 × 6", maxFrameRate: "33 kHz", dataInterface: "Camera Link", color: "彩色", lensInterface: "M72" },
+						{ model: "L5087MK471", pixel: "8", targetSize: "", pixelSize: "7μm", shutterType: "Global", resolution: "8192 × 4", maxFrameRate: "100 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" },
+						{ model: "L5162MK170", pixel: "16", targetSize: "", pixelSize: "3.5μm", shutterType: "Global", resolution: "16384 × 1", maxFrameRate: "50 kHz", dataInterface: "Camera Link", color: "黑白", lensInterface: "M72" }
+					]
+				}
+            }
+        };
+        // DOM元素
+        const sourceBrandSelect = document.getElementById('source-brand');
+        const sourceModelInput = document.getElementById('source-model');
+        const modelSuggestionsDatalist = document.getElementById('model-suggestions');
+        const pixelInput = document.getElementById('pixel');
+        const targetSizeSmallInput = document.getElementById('target-size-small');
+        const targetSizeWidthInput = document.getElementById('target-size-width');
+        const targetSizeHeightInput = document.getElementById('target-size-height');
+        const pixelSizeInput = document.getElementById('pixel-size');
+        const shutterTypeSelect = document.getElementById('shutter-type');
+        const resolutionWidthInput = document.getElementById('resolution-width');
+        const resolutionHeightInput = document.getElementById('resolution-height');
+        const maxFrameRateInput = document.getElementById('max-frame-rate');
+        const dataInterfaceSelect = document.getElementById('data-interface');
+        const colorSelect = document.getElementById('color');
+        const lensInterfaceSelect = document.getElementById('lens-interface');
+        const replaceBtn = document.getElementById('replace-btn');
+        const replaceBtnParams = document.getElementById('replace-btn-params');
+        const resetBtn = document.getElementById('reset-btn');
+        const resetParamsBtn = document.getElementById('reset-params-btn');
+        const resultContainer = document.getElementById('result-container');
+        const resultSection = document.getElementById('result-section');
+        const paramsSection = document.getElementById('params-section');
+        const cameraTypeBtns = document.querySelectorAll('.camera-type-btn');
+        const targetSizeModeBtns = document.querySelectorAll('.target-size-mode-btn');
+        const pixelUnitSpan = document.getElementById('pixel-unit');
+        const frameRateLabel = document.getElementById('frame-rate-label');
+        const loadingElement = document.getElementById('loading');
+        const modelNotFoundModal = document.getElementById('model-not-found-modal');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+        const errorContainer = document.getElementById('error-container');
+        const errorList = document.getElementById('error-list');
+
+        // 当前相机类型
+        let currentCameraType = 'area';
+        // 当前靶面尺寸模式
+        let currentTargetSizeMode = 'small';
+
+        // 快门类型映射
+        const shutterTypeMap = {
+            'Global': '全局',
+            'Rolling': '卷帘',
+            '全局': '全局',
+            '卷帘': '卷帘'
+        };
+
+        // 快门类型反向映射，用于设置选择框值
+        const shutterTypeReverseMap = {
+            '全局': 'Global',
+            '卷帘': 'Rolling'
+        };
+
+        // 初始化相机类型选择
+        function initCameraTypeSelection() {
+            cameraTypeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    cameraTypeBtns.forEach(b => b.classList.remove('active'));
+                    // 为当前按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 更新当前相机类型
+                    currentCameraType = this.dataset.type;
+                    
+                    // 更新UI标签
+                    updateUILabels();
+                    
+                    // 更新型号建议列表
+                    updateModelSuggestions();
+                    
+                    // 更新品牌选择选项
+                    updateBrandOptions();
+                    
+                    // 重置参数
+                    resetParameters();
+                });
+            });
+        }
+
+        // 初始化靶面尺寸模式选择
+        function initTargetSizeModeSelection() {
+            targetSizeModeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    targetSizeModeBtns.forEach(b => b.classList.remove('active'));
+                    // 为当前按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 更新当前靶面尺寸模式
+                    currentTargetSizeMode = this.dataset.mode;
+                    
+                    // 更新靶面尺寸输入UI
+                    updateTargetSizeUI();
+                });
+            });
+        }
+
+        // 更新靶面尺寸输入UI
+        function updateTargetSizeUI() {
+            const smallModeElements = document.querySelectorAll('.small-mode');
+            const largeModeElements = document.querySelectorAll('.large-mode');
+            
+            if (currentTargetSizeMode === 'small') {
+                smallModeElements.forEach(el => el.style.display = 'flex');
+                largeModeElements.forEach(el => el.style.display = 'none');
+            } else {
+                smallModeElements.forEach(el => el.style.display = 'none');
+                largeModeElements.forEach(el => el.style.display = 'flex');
+            }
+        }
+
+        // 获取当前靶面尺寸值
+        function getTargetSizeValue() {
+            if (currentTargetSizeMode === 'small') {
+                return targetSizeSmallInput.value.trim();
+            } else {
+                const width = targetSizeWidthInput.value.trim();
+                const height = targetSizeHeightInput.value.trim();
+                return width && height ? `${width} × ${height}` : '';
+            }
+        }
+
+        // 设置靶面尺寸值
+        function setTargetSizeValue(value) {
+            if (!value) return;
+            
+            // 检查是否为小靶面格式（包含/）
+            if (value.includes('/')) {
+                // 切换到小靶面模式
+                const smallModeBtn = document.querySelector('.target-size-mode-btn[data-mode="small"]');
+                if (smallModeBtn && !smallModeBtn.classList.contains('active')) {
+                    smallModeBtn.click();
+                }
+                targetSizeSmallInput.value = value;
+            } 
+            // 检查是否为大靶面格式（包含×）
+            else if (value.includes('×')) {
+                // 切换到大靶面模式
+                const largeModeBtn = document.querySelector('.target-size-mode-btn[data-mode="large"]');
+                if (largeModeBtn && !largeModeBtn.classList.contains('active')) {
+                    largeModeBtn.click();
+                }
+                
+                const parts = value.split('×');
+                if (parts.length === 2) {
+                    targetSizeWidthInput.value = parts[0].trim();
+                    targetSizeHeightInput.value = parts[1].trim();
+                }
+            }
+        }
+
+        // 更新UI标签
+        function updateUILabels() {
+            if (currentCameraType === 'line') {
+                pixelUnitSpan.textContent = 'K';
+                frameRateLabel.textContent = '行频';
+                targetSizeSmallInput.placeholder = "线扫相机无需提供靶面尺寸";
+                targetSizeSmallInput.disabled = true;
+                targetSizeWidthInput.disabled = true;
+                targetSizeHeightInput.disabled = true;
+                targetSizeSmallInput.value = '';
+                targetSizeWidthInput.value = '';
+                targetSizeHeightInput.value = '';
+            } else {
+                pixelUnitSpan.textContent = '万';
+                frameRateLabel.textContent = '帧率';
+                targetSizeSmallInput.placeholder = "例如: 1/2.9";
+                targetSizeWidthInput.placeholder = "宽(如23.0)";
+                targetSizeHeightInput.placeholder = "高(如23.0)";
+                targetSizeSmallInput.disabled = false;
+                targetSizeWidthInput.disabled = false;
+                targetSizeHeightInput.disabled = false;
+            }
+        }
+
+        // 更新品牌选择选项
+        function updateBrandOptions() {
+            // 保存当前选择的值
+            const currentSourceBrand = sourceBrandSelect.value;
+            
+            // 清空选项
+            sourceBrandSelect.innerHTML = '<option value="">-- 请选择源品牌（可选） --</option>';
+            
+            // 获取当前相机类型的品牌
+            const brands = cameraBrands[currentCameraType];
+            
+            // 添加品牌选项
+            for (const brand in brands) {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brands[brand].name;
+                sourceBrandSelect.appendChild(option);
+            }
+            
+            // 尝试恢复之前的选择
+            if (currentSourceBrand && sourceBrandSelect.querySelector(`option[value="${currentSourceBrand}"]`)) {
+                sourceBrandSelect.value = currentSourceBrand;
+            }
+        }
+
+        // 更新型号建议列表
+        function updateModelSuggestions() {
+            // 清空现有建议
+            modelSuggestionsDatalist.innerHTML = '';
+            
+            // 获取当前相机类型的所有品牌
+            const brands = cameraBrands[currentCameraType];
+            
+            // 为每个品牌添加相机型号到建议列表
+            for (const brand in brands) {
+                brands[brand].cameras.forEach(camera => {
+                    const option = document.createElement('option');
+                    option.value = camera.model;
+                    modelSuggestionsDatalist.appendChild(option);
+                });
+            }
+        }
+
+        // 像素比较函数 - 面阵相机允许10%误差，线扫相机必须严格相等
+        function isPixelCompatible(pixel1, pixel2, isLineScan) {
+            if (isLineScan) {
+                // 线扫相机：必须严格相等
+                return pixel1 === pixel2;
+            } else {
+                // 面阵相机：允许10%误差
+                const value1 = parseFloat(pixel1);
+                const value2 = parseFloat(pixel2);
+                
+                if (isNaN(value1) || isNaN(value2)) return false;
+                
+                const diff = Math.abs(value1 - value2);
+                const avg = (value1 + value2) / 2;
+                return (diff / avg) <= 0.1;
+            }
+        }
+
+        // 像元尺寸比较函数 - 线扫相机必须严格相等，面阵相机允许10%误差
+        function isPixelSizeCompatible(pixelSize1, pixelSize2, isLineScan) {
+            if (!pixelSize1 || !pixelSize2) return false;
+            
+            // 提取数字部分
+            const match1 = pixelSize1.match(/(\d+(?:\.\d+)?)/);
+            const match2 = pixelSize2.match(/(\d+(?:\.\d+)?)/);
+            
+            if (!match1 || !match2) return false;
+            
+            const value1 = parseFloat(match1[1]);
+            const value2 = parseFloat(match2[1]);
+            
+            if (isNaN(value1) || isNaN(value2)) return false;
+            
+            if (isLineScan) {
+                // 线扫相机：必须严格相等
+                return value1 === value2;
+            } else {
+                // 面阵相机：允许10%误差
+                const diff = Math.abs(value1 - value2);
+                const avg = (value1 + value2) / 2;
+                return (diff / avg) <= 0.1;
+            }
+        }
+
+        // 快门类型比较函数 - 必须完全相等
+        function isShutterTypeCompatible(shutterType1, shutterType2) {
+            // 使用映射表进行比较
+            const mapped1 = shutterTypeMap[shutterType1] || shutterType1;
+            const mapped2 = shutterTypeMap[shutterType2] || shutterType2;
+            return mapped1 === mapped2;
+        }
+
+        // 帧率/行频提取函数
+        function extractFrameRate(frameRateStr) {
+            if (!frameRateStr) return 0;
+            // 提取数字部分，忽略fps/kHz单位
+            const match = frameRateStr.match(/(\d+(?:\.\d+)?)/);
+            return match ? parseFloat(match[1]) : 0;
+        }
+
+        // 帧率/行频比较函数 - 修改后的逻辑：替换相机的帧率/行频大于源相机，或者小于源相机的10%以内
+        function isFrameRateCompatible(requiredRate, cameraRate) {
+            const requiredValue = extractFrameRate(requiredRate);
+            const cameraValue = extractFrameRate(cameraRate);
+            
+            if (isNaN(requiredValue) || isNaN(cameraValue)) return false;
+            
+            // 修改后的逻辑：替换相机的帧率/行频大于源相机，或者小于源相机的10%以内
+            return cameraValue >= requiredValue * 0.9;
+        }
+
+        // 分辨率比较函数 - 允许10%误差
+        function isResolutionSimilar(res1, res2) {
+            if (!res1 || !res2) return false;
+            
+            // 提取分辨率中的宽高值
+            const res1Match = res1.match(/(\d+)\s*×\s*(\d+)/);
+            const res2Match = res2.match(/(\d+)\s*×\s*(\d+)/);
+            
+            if (!res1Match || !res2Match) return false;
+            
+            const width1 = parseInt(res1Match[1]);
+            const height1 = parseInt(res1Match[2]);
+            const width2 = parseInt(res2Match[1]);
+            const height2 = parseInt(res2Match[2]);
+            
+            // 计算总像素数
+            const totalPixels1 = width1 * height1;
+            const totalPixels2 = width2 * height2;
+            
+            // 允许10%误差
+            const diff = Math.abs(totalPixels1 - totalPixels2);
+            const avg = (totalPixels1 + totalPixels2) / 2;
+            return (diff / avg) <= 0.1;
+        }
+
+        // 靶面尺寸比较函数 - 必须完全相等
+        function isTargetSizeSimilar(size1, size2) {
+            if (!size1 || !size2) return false;
+            
+            // 简单实现：直接比较字符串
+            return size1 === size2;
+        }
+
+        // 颜色比较函数 - 必须完全相等
+        function isColorCompatible(color1, color2) {
+            return color1 === color2;
+        }
+
+        // 根据型号查找相机
+        function findCameraByModel(model) {
+            // 在当前相机类型的所有品牌中查找
+            const brands = cameraBrands[currentCameraType];
+            
+            for (const brand in brands) {
+                const camera = brands[brand].cameras.find(c => c.model === model);
+                if (camera) {
+                    return {
+                        camera,
+                        brand
+                    };
+                }
+            }
+            
+            // 如果在当前类型中没找到，尝试在其他类型中查找
+            const otherType = currentCameraType === 'area' ? 'line' : 'area';
+            const otherBrands = cameraBrands[otherType];
+            
+            for (const brand in otherBrands) {
+                const camera = otherBrands[brand].cameras.find(c => c.model === model);
+                if (camera) {
+                    return {
+                        camera,
+                        brand,
+                        type: otherType
+                    };
+                }
+            }
+            
+            return null;
+        }
+
+        // 显示模态框
+        function showModal(modal) {
+            modal.style.display = 'flex';
+        }
+
+        // 隐藏模态框
+        function hideModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        // 复制文本到剪贴板
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        // 验证必要参数
+        function validateRequiredParameters() {
+            const errors = [];
+            
+            // 清除之前的错误状态
+            clearErrorStyles();
+            
+            // 检查像素
+            if (!pixelInput.value.trim()) {
+                errors.push({
+                    field: 'pixel',
+                    message: '请输入像素值'
+                });
+            }
+            
+            // 检查像元尺寸
+            if (!pixelSizeInput.value.trim()) {
+                errors.push({
+                    field: 'pixel-size',
+                    message: '请输入像元尺寸'
+                });
+            }
+            
+            // 检查快门类型
+            if (!shutterTypeSelect.value) {
+                errors.push({
+                    field: 'shutter-type',
+                    message: '请选择快门类型'
+                });
+            }
+            
+            // 检查分辨率
+            if (!resolutionWidthInput.value.trim() || !resolutionHeightInput.value.trim()) {
+                errors.push({
+                    field: 'resolution',
+                    message: '请输入完整的分辨率（宽和高）'
+                });
+            }
+            
+            // 检查最大帧率/行频
+            if (!maxFrameRateInput.value.trim()) {
+                errors.push({
+                    field: 'max-frame-rate',
+                    message: `请输入最大${currentCameraType === 'line' ? '行频' : '帧率'}`
+                });
+            }
+            
+            // 检查数据接口
+            if (!dataInterfaceSelect.value) {
+                errors.push({
+                    field: 'data-interface',
+                    message: '请选择数据接口'
+                });
+            }
+            
+            // 检查颜色
+            if (!colorSelect.value) {
+                errors.push({
+                    field: 'color',
+                    message: '请选择黑白｜彩色'
+                });
+            }
+            
+            // 检查镜头接口
+            if (!lensInterfaceSelect.value) {
+                errors.push({
+                    field: 'lens-interface',
+                    message: '请选择镜头接口'
+                });
+            }
+            
+            // 检查靶面尺寸（仅面阵相机需要）
+            if (currentCameraType === 'area') {
+                const targetSize = getTargetSizeValue();
+                if (!targetSize) {
+                    errors.push({
+                        field: 'target-size',
+                        message: '请输入靶面尺寸'
+                    });
+                }
+            }
+            
+            // 如果有错误，显示错误提示
+            if (errors.length > 0) {
+                displayErrors(errors);
+                return false;
+            }
+            
+            // 没有错误，隐藏错误提示
+            hideErrors();
+            return true;
+        }
+
+        // 显示错误提示
+        function displayErrors(errors) {
+            // 清空错误列表
+            errorList.innerHTML = '';
+            
+            // 添加错误项
+            errors.forEach(error => {
+                const errorItem = document.createElement('li');
+                errorItem.className = 'error-item';
+                errorItem.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+                errorList.appendChild(errorItem);
+                
+                // 高亮显示对应的输入框
+                highlightErrorField(error.field);
+            });
+            
+            // 显示错误容器
+            errorContainer.style.display = 'block';
+            
+            // 滚动到错误提示区域
+            errorContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 高亮显示错误的输入字段
+        function highlightErrorField(fieldId) {
+            let fieldElement;
+            
+            switch (fieldId) {
+                case 'pixel':
+                    fieldElement = pixelInput;
+                    break;
+                case 'pixel-size':
+                    fieldElement = pixelSizeInput;
+                    break;
+                case 'shutter-type':
+                    fieldElement = shutterTypeSelect;
+                    break;
+                case 'resolution':
+                    fieldElement = resolutionWidthInput; // 使用宽度输入框作为代表
+                    break;
+                case 'max-frame-rate':
+                    fieldElement = maxFrameRateInput;
+                    break;
+                case 'data-interface':
+                    fieldElement = dataInterfaceSelect;
+                    break;
+                case 'color':
+                    fieldElement = colorSelect;
+                    break;
+                case 'lens-interface':
+                    fieldElement = lensInterfaceSelect;
+                    break;
+                case 'target-size':
+                    // 根据当前模式选择对应的输入框
+                    if (currentTargetSizeMode === 'small') {
+                        fieldElement = targetSizeSmallInput;
+                    } else {
+                        fieldElement = targetSizeWidthInput; // 使用宽度输入框作为代表
+                    }
+                    break;
+            }
+            
+            if (fieldElement) {
+                fieldElement.classList.add('input-error');
+                
+                // 添加输入事件监听，当用户开始输入时移除错误样式
+                const removeError = () => {
+                    fieldElement.classList.remove('input-error');
+                    fieldElement.removeEventListener('input', removeError);
+                    fieldElement.removeEventListener('change', removeError);
+                };
+                
+                fieldElement.addEventListener('input', removeError);
+                fieldElement.addEventListener('change', removeError);
+            }
+        }
+
+        // 清除所有错误样式
+        function clearErrorStyles() {
+            const errorFields = [
+                pixelInput, pixelSizeInput, shutterTypeSelect,
+                resolutionWidthInput, resolutionHeightInput, maxFrameRateInput,
+                dataInterfaceSelect, colorSelect, lensInterfaceSelect,
+                targetSizeSmallInput, targetSizeWidthInput, targetSizeHeightInput
+            ];
+            
+            errorFields.forEach(field => {
+                if (field) {
+                    field.classList.remove('input-error');
+                }
+            });
+        }
+
+        // 隐藏错误提示
+        function hideErrors() {
+            errorContainer.style.display = 'none';
+        }
+
+        // 初始化品牌选择
+        function initBrandSelection() {
+            // 源品牌变化时更新型号列表
+            sourceBrandSelect.addEventListener('change', function() {
+                const selectedBrand = this.value;
+                
+                if (selectedBrand && cameraBrands[currentCameraType][selectedBrand]) {
+                    // 如果选择了品牌，可以更新输入框的提示文本
+                    sourceModelInput.placeholder = `输入${cameraBrands[currentCameraType][selectedBrand].name}型号`;
+                } else {
+                    sourceModelInput.placeholder = "输入或选择相机型号";
+                }
+            });
+            
+            // 当输入源相机型号时，尝试自动匹配并填充参数
+            sourceModelInput.addEventListener('blur', function() {
+                const model = this.value.trim();
+                
+                if (model) {
+                    const result = findCameraByModel(model);
+                    
+                    if (result) {
+                        const { camera, brand, type } = result;
+                        
+                        // 如果相机类型与当前类型不同，切换类型
+                        if (type && type !== currentCameraType) {
+                            // 找到对应类型的按钮并点击
+                            const typeBtn = document.querySelector(`.camera-type-btn[data-type="${type}"]`);
+                            if (typeBtn) {
+                                typeBtn.click();
+                            }
+                        }
+                        
+                        // 设置源品牌
+                        sourceBrandSelect.value = brand;
+                        
+                        // 填充参数
+                        pixelInput.value = camera.pixel;
+                        
+                        // 设置靶面尺寸
+                        setTargetSizeValue(camera.targetSize);
+                        
+                        pixelSizeInput.value = camera.pixelSize;
+                        
+                        // 修复快门类型选择问题 - 处理中文快门类型
+                        let shutterTypeValue = camera.shutterType;
+                        if (shutterTypeValue === '全局' || shutterTypeValue === '卷帘') {
+                            shutterTypeValue = shutterTypeReverseMap[shutterTypeValue];
+                        }
+                        shutterTypeSelect.value = shutterTypeValue;
+                        
+                        // 处理分辨率 - 从字符串中提取宽高
+                        const resolutionMatch = camera.resolution.match(/(\d+)\s*×\s*(\d+)/);
+                        if (resolutionMatch) {
+                            resolutionWidthInput.value = resolutionMatch[1];
+                            resolutionHeightInput.value = resolutionMatch[2];
+                        }
+                        
+                        maxFrameRateInput.value = camera.maxFrameRate;
+                        dataInterfaceSelect.value = camera.dataInterface;
+                        colorSelect.value = camera.color;
+                        lensInterfaceSelect.value = camera.lensInterface;
+                    } else {
+                        // 如果没有找到相机型号，显示模态框
+                        showModal(modelNotFoundModal);
+                    }
+                }
+            });
+            
+            // 交换品牌按钮 - 修改为仅交换源品牌
+            document.getElementById('swap-brands').addEventListener('click', function() {
+                const sourceBrand = sourceBrandSelect.value;
+                // 目标品牌固定为嘉励相机，不进行交换
+                // 只需将源品牌重置为空
+                sourceBrandSelect.value = '';
+            });
+        }
+
+        // 查找替换相机 - 添加加载动画
+        function findReplacementCameras() {
+            // 验证必要参数
+            if (!validateRequiredParameters()) {
+                return;
+            }
+            
+            // 显示加载动画
+            loadingElement.style.display = 'block';
+            resultContainer.innerHTML = '';
+            
+            // 模拟加载时间
+            setTimeout(() => {
+                // 获取当前参数
+                const pixel = pixelInput.value.trim();
+                
+                // 获取靶面尺寸
+                const targetSize = getTargetSizeValue();
+                
+                const pixelSize = pixelSizeInput.value.trim();
+                const shutterType = shutterTypeSelect.value;
+                
+                // 从两个输入框获取分辨率并组合
+                const resolutionWidth = resolutionWidthInput.value.trim();
+                const resolutionHeight = resolutionHeightInput.value.trim();
+                const resolution = resolutionWidth && resolutionHeight ? 
+                    `${resolutionWidth} × ${resolutionHeight}` : '';
+                
+                const maxFrameRate = maxFrameRateInput.value.trim();
+                const dataInterface = dataInterfaceSelect.value;
+                const color = colorSelect.value;
+                const lensInterface = lensInterfaceSelect.value;
+                
+                // 目标品牌固定为嘉励相机
+                const targetBrand = 'jiali';
+                
+                // 获取目标品牌的相机列表
+                const targetCameras = cameraBrands[currentCameraType][targetBrand] ? 
+                    cameraBrands[currentCameraType][targetBrand].cameras : [];
+                
+                if (targetCameras.length === 0) {
+                    resultContainer.innerHTML = '<p class="no-match"><i class="fas fa-exclamation-triangle"></i><br>当前相机类型下无可用嘉励相机型号</p>';
+                    loadingElement.style.display = 'none';
+                    return;
+                }
+                
+                // 查找匹配的相机
+                const matches = [];
+                const closeMatches = [];
+                
+                targetCameras.forEach(camera => {
+                    const isLineScan = currentCameraType === 'line';
+                    
+                    // 根据相机类型使用不同的匹配逻辑
+                    if (isLineScan) {
+                        // 线扫相机匹配逻辑：像素、像元尺寸、颜色必须完全相等
+                        const mustMatchParams = {
+                            pixel: isPixelCompatible(pixel, camera.pixel, true),
+                            pixelSize: isPixelSizeCompatible(pixelSize, camera.pixelSize, true),
+                            color: isColorCompatible(color, camera.color)
+                        };
+                        
+                        // 如果必须匹配的参数有任何不匹配，直接跳过该相机
+                        const isMustMatchPerfect = Object.values(mustMatchParams).every(Boolean);
+                        if (!isMustMatchPerfect) {
+                            return;
+                        }
+                        
+                        // 其他参数作为可沟通参数
+                        const communicationParams = {
+                            resolution: isResolutionSimilar(resolution, camera.resolution),
+                            maxFrameRate: isFrameRateCompatible(maxFrameRate, camera.maxFrameRate),
+                            shutterType: isShutterTypeCompatible(shutterType, camera.shutterType),
+                            dataInterface: dataInterface === camera.dataInterface,
+                            lensInterface: lensInterface === camera.lensInterface
+                        };
+                        
+                        // 计算匹配分数
+                        const mustMatchScore = Object.values(mustMatchParams).filter(Boolean).length;
+                        const communicationScore = Object.values(communicationParams).filter(Boolean).length;
+                        
+                        // 计算总体匹配度
+                        const totalMustMatchParams = Object.keys(mustMatchParams).length;
+                        const totalCommunicationParams = Object.keys(communicationParams).length;
+                        const totalRelevantParams = totalMustMatchParams + totalCommunicationParams;
+                        
+                        const matchPercentage = Math.round(((mustMatchScore + communicationScore) / totalRelevantParams) * 100);
+                        
+                        // 合并所有匹配详情
+                        const matchDetails = {
+                            ...mustMatchParams,
+                            ...communicationParams
+                        };
+                        
+                        // 检查是否完全匹配
+                        const isPerfectMatch = Object.values(mustMatchParams).every(Boolean) && 
+                                              Object.values(communicationParams).every(Boolean);
+                        
+                        if (isPerfectMatch) {
+                            matches.push({
+                                camera,
+                                matchDetails,
+                                matchPercentage,
+                                mustMatchScore,
+                                communicationScore
+                            });
+                        } else {
+                            // 线扫相机只要必须匹配的参数完全匹配，就作为候选
+                            closeMatches.push({
+                                camera,
+                                matchDetails,
+                                matchPercentage,
+                                mustMatchScore,
+                                communicationScore
+                            });
+                        }
+                    } else {
+                        // 面阵相机匹配逻辑：靶面尺寸、颜色、快门类型必须相等，像素允许10%误差
+                        const mustMatchParams = {
+                            targetSize: isTargetSizeSimilar(targetSize, camera.targetSize),
+                            color: isColorCompatible(color, camera.color),
+                            shutterType: isShutterTypeCompatible(shutterType, camera.shutterType),
+                            pixel: isPixelCompatible(pixel, camera.pixel, false)
+                        };
+                        
+                        // 如果必须匹配的参数有任何不匹配，直接跳过该相机
+                        const isMustMatchPerfect = Object.values(mustMatchParams).every(Boolean);
+                        if (!isMustMatchPerfect) {
+                            return;
+                        }
+                        
+                        // 其他参数作为可沟通参数
+                        const communicationParams = {
+                            pixelSize: isPixelSizeCompatible(pixelSize, camera.pixelSize, false),
+                            resolution: isResolutionSimilar(resolution, camera.resolution),
+                            maxFrameRate: isFrameRateCompatible(maxFrameRate, camera.maxFrameRate),
+                            dataInterface: dataInterface === camera.dataInterface,
+                            lensInterface: lensInterface === camera.lensInterface
+                        };
+                        
+                        // 计算匹配分数
+                        const mustMatchScore = Object.values(mustMatchParams).filter(Boolean).length;
+                        const communicationScore = Object.values(communicationParams).filter(Boolean).length;
+                        
+                        // 计算总体匹配度
+                        const totalMustMatchParams = Object.keys(mustMatchParams).length;
+                        const totalCommunicationParams = Object.keys(communicationParams).length;
+                        const totalRelevantParams = totalMustMatchParams + totalCommunicationParams;
+                        
+                        const matchPercentage = Math.round(((mustMatchScore + communicationScore) / totalRelevantParams) * 100);
+                        
+                        // 合并所有匹配详情
+                        const matchDetails = {
+                            ...mustMatchParams,
+                            ...communicationParams
+                        };
+                        
+                        // 检查是否完全匹配
+                        const isPerfectMatch = Object.values(mustMatchParams).every(Boolean) && 
+                                              Object.values(communicationParams).every(Boolean);
+                        
+                        if (isPerfectMatch) {
+                            matches.push({
+                                camera,
+                                matchDetails,
+                                matchPercentage,
+                                mustMatchScore,
+                                communicationScore
+                            });
+                        } else {
+                            // 面阵相机只要必须匹配的参数完全匹配，就作为候选
+                            closeMatches.push({
+                                camera,
+                                matchDetails,
+                                matchPercentage,
+                                mustMatchScore,
+                                communicationScore
+                            });
+                        }
+                    }
+                });
+                
+                // 显示结果
+                displayResults(matches, closeMatches, {
+                    pixel, targetSize, pixelSize, shutterType, resolution, 
+                    maxFrameRate, dataInterface, color, lensInterface
+                }, targetBrand);
+                
+                // 隐藏加载动画
+                loadingElement.style.display = 'none';
+                
+                // 滚动到结果区域
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 800); // 模拟800ms的加载时间
+        }
+
+        // 显示匹配结果
+        function displayResults(matches, closeMatches, originalParams, targetBrand) {
+            resultContainer.innerHTML = '';
+            
+            if (matches.length === 0 && closeMatches.length === 0) {
+                // 没有找到任何匹配的相机，显示失败分析
+                displayFailureAnalysis(originalParams, targetBrand);
+                return;
+            }
+            
+            // 显示完全匹配的相机
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const matchItem = createMatchItem(match.camera, match.matchDetails, originalParams, true, match.matchPercentage, targetBrand);
+                    resultContainer.appendChild(matchItem);
+                });
+            }
+            
+            // 显示近似匹配的相机
+            if (closeMatches.length > 0) {
+                // 按匹配分数排序
+                closeMatches.sort((a, b) => b.matchPercentage - a.matchPercentage);
+                
+                // 显示所有近似匹配的相机
+                closeMatches.forEach(match => {
+                    const matchItem = createMatchItem(match.camera, match.matchDetails, originalParams, false, match.matchPercentage, targetBrand);
+                    matchItem.classList.add('close-match');
+                    resultContainer.appendChild(matchItem);
+                });
+            }
+        }
+
+        // 创建匹配项
+        function createMatchItem(camera, matchDetails, originalParams, isPerfectMatch, matchPercentage, targetBrand) {
+            const matchItem = document.createElement('div');
+            matchItem.className = 'match-item';
+            
+            const matchHeader = document.createElement('div');
+            matchHeader.className = 'match-header';
+            
+            const titleContainer = document.createElement('div');
+            titleContainer.style.display = 'flex';
+            titleContainer.style.alignItems = 'center';
+            titleContainer.style.gap = '10px';
+            
+            const title = document.createElement('h3');
+            title.textContent = camera.model;
+            
+            // 添加复制按钮
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制型号';
+            copyBtn.addEventListener('click', function() {
+                copyToClipboard(camera.model);
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制型号';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+            
+            titleContainer.appendChild(title);
+            titleContainer.appendChild(copyBtn);
+            
+            const matchScore = document.createElement('div');
+            matchScore.className = 'match-score';
+            matchScore.textContent = `匹配度: ${matchPercentage}%`;
+            
+            matchHeader.appendChild(titleContainer);
+            matchHeader.appendChild(matchScore);
+            matchItem.appendChild(matchHeader);
+            
+            if (!isPerfectMatch) {
+                const warning = document.createElement('div');
+                warning.className = 'compatibility communication-needed';
+                warning.innerHTML = '<i class="fas fa-comments"></i> 部分参数需沟通';
+                matchItem.appendChild(warning);
+            }
+            
+            const comparison = document.createElement('div');
+            comparison.className = 'parameter-comparison';
+            
+            // 原参数
+            const originalDiv = document.createElement('div');
+            originalDiv.className = 'parameter-section';
+            const originalTitle = document.createElement('h4');
+            originalTitle.textContent = '输入参数';
+            originalDiv.appendChild(originalTitle);
+            
+            // 添加每个参数
+            Object.keys(originalParams).forEach(key => {
+                // 线扫相机不显示靶面尺寸
+                if (currentCameraType === 'line' && key === 'targetSize') return;
+                
+                const paramRow = document.createElement('div');
+                paramRow.className = 'parameter-row';
+                
+                const paramName = document.createElement('span');
+                paramName.className = 'parameter-name';
+                paramName.textContent = getParameterDisplayName(key);
+                
+                const paramValue = document.createElement('span');
+                paramValue.className = 'parameter-value';
+                paramValue.textContent = originalParams[key];
+                
+                paramRow.appendChild(paramName);
+                paramRow.appendChild(paramValue);
+                originalDiv.appendChild(paramRow);
+            });
+            
+            // 替换相机参数
+            const replacementDiv = document.createElement('div');
+            replacementDiv.className = 'parameter-section';
+            const replacementTitle = document.createElement('h4');
+            replacementTitle.textContent = `嘉励相机替换型号参数`;
+            replacementDiv.appendChild(replacementTitle);
+            
+            // 添加每个参数
+            Object.keys(camera).forEach(key => {
+                if (key !== 'model') {
+                    // 线扫相机不显示靶面尺寸
+                    if (currentCameraType === 'line' && key === 'targetSize') return;
+                    
+                    const paramRow = document.createElement('div');
+                    paramRow.className = 'parameter-row';
+                    
+                    const paramName = document.createElement('span');
+                    paramName.className = 'parameter-name';
+                    paramName.textContent = getParameterDisplayName(key);
+                    
+                    const paramValue = document.createElement('span');
+                    paramValue.className = 'parameter-value';
+                    paramValue.textContent = camera[key];
+                    
+                    // 检查参数是否匹配
+                    if (matchDetails[key] === false) {
+                        let compatibility;
+                        // 线扫相机的像素、像元尺寸、颜色必须匹配，其他参数可沟通
+                        if (currentCameraType === 'line' && 
+                            (key === 'pixel' || key === 'pixelSize' || key === 'color')) {
+                            compatibility = document.createElement('span');
+                            compatibility.className = 'compatibility incompatible';
+                            compatibility.innerHTML = '<i class="fas fa-times-circle"></i> 不匹配';
+                        } else {
+                            compatibility = document.createElement('span');
+                            compatibility.className = 'compatibility communication-needed';
+                            compatibility.innerHTML = '<i class="fas fa-comments"></i> 需沟通';
+                        }
+                        paramValue.appendChild(compatibility);
+                    } else {
+                        const compatibility = document.createElement('span');
+                        compatibility.className = 'compatibility compatible';
+                        compatibility.innerHTML = '<i class="fas fa-check-circle"></i> 匹配';
+                        paramValue.appendChild(compatibility);
+                    }
+                    
+                    paramRow.appendChild(paramName);
+                    paramRow.appendChild(paramValue);
+                    replacementDiv.appendChild(paramRow);
+                }
+            });
+            
+            comparison.appendChild(originalDiv);
+            comparison.appendChild(replacementDiv);
+            
+            matchItem.appendChild(comparison);
+            
+            return matchItem;
+        }
+
+        // 显示失败分析
+        function displayFailureAnalysis(originalParams, targetBrand) {
+            const failureAnalysis = document.createElement('div');
+            failureAnalysis.className = 'failure-analysis';
+            
+            const title = document.createElement('h3');
+            title.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 未找到匹配的嘉励相机';
+            failureAnalysis.appendChild(title);
+            
+            const failureList = document.createElement('ul');
+            failureList.className = 'failure-list';
+            
+            // 分析每个参数
+            const analysis = analyzeParameters(originalParams, targetBrand);
+            
+            analysis.forEach(item => {
+                const failureItem = document.createElement('li');
+                failureItem.className = 'failure-item';
+                failureItem.innerHTML = `<i class="fas fa-times-circle"></i> <strong>${item.parameter}</strong>: ${item.description}`;
+                failureList.appendChild(failureItem);
+            });
+            
+            failureAnalysis.appendChild(failureList);
+            
+            // 添加改进建议
+            const suggestions = document.createElement('div');
+            suggestions.className = 'suggestions';
+            
+            const suggestionsTitle = document.createElement('h4');
+            suggestionsTitle.innerHTML = '<i class="fas fa-lightbulb"></i> 改进建议';
+            suggestions.appendChild(suggestionsTitle);
+            
+            const suggestionList = document.createElement('ul');
+            suggestionList.className = 'suggestion-list';
+            
+            const suggestionItems = [
+                '尝试放宽某些参数要求，如分辨率或帧率',
+                '考虑使用不同的数据接口类型',
+                '检查快门类型是否必须严格匹配',
+                '请联系嘉励技术支持获取进一步支持',
+                '考虑使用定制化相机解决方案'
+            ];
+            
+            suggestionItems.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'suggestion-item';
+                li.innerHTML = `<i class="fas fa-chevron-right"></i> ${item}`;
+                suggestionList.appendChild(li);
+            });
+            
+            suggestions.appendChild(suggestionList);
+            failureAnalysis.appendChild(suggestions);
+            
+            resultContainer.appendChild(failureAnalysis);
+        }
+
+        // 分析参数匹配失败原因
+        function analyzeParameters(originalParams, targetBrand) {
+            const analysis = [];
+            const targetCameras = cameraBrands[currentCameraType][targetBrand].cameras;
+            
+            if (currentCameraType === 'line') {
+                // 线扫相机：检查像素、像元尺寸、颜色
+                const pixelMatch = targetCameras.some(camera => 
+                    isPixelCompatible(originalParams.pixel, camera.pixel, true)
+                );
+                if (!pixelMatch) {
+                    analysis.push({
+                        parameter: '像素',
+                        description: `嘉励相机中没有与 ${originalParams.pixel}K 相同的像素`
+                    });
+                }
+                
+                const pixelSizeMatch = targetCameras.some(camera => 
+                    isPixelSizeCompatible(originalParams.pixelSize, camera.pixelSize, true)
+                );
+                if (!pixelSizeMatch) {
+                    analysis.push({
+                        parameter: '像元尺寸',
+                        description: `嘉励相机中没有与 ${originalParams.pixelSize} 相同的像元尺寸`
+                    });
+                }
+                
+                const colorMatch = targetCameras.some(camera => 
+                    isColorCompatible(originalParams.color, camera.color)
+                );
+                if (!colorMatch) {
+                    analysis.push({
+                        parameter: '黑白｜彩色',
+                        description: `嘉励相机中没有与 ${originalParams.color} 相同的颜色类型`
+                    });
+                }
+            } else {
+                // 面阵相机：检查靶面尺寸、颜色、快门类型、像素
+                const targetSizeMatch = targetCameras.some(camera => 
+                    isTargetSizeSimilar(originalParams.targetSize, camera.targetSize)
+                );
+                if (!targetSizeMatch) {
+                    analysis.push({
+                        parameter: '靶面尺寸',
+                        description: `嘉励相机中没有与 ${originalParams.targetSize} 相同的靶面尺寸`
+                    });
+                }
+                
+                const colorMatch = targetCameras.some(camera => 
+                    isColorCompatible(originalParams.color, camera.color)
+                );
+                if (!colorMatch) {
+                    analysis.push({
+                        parameter: '黑白｜彩色',
+                        description: `嘉励相机中没有与 ${originalParams.color} 相同的颜色类型`
+                    });
+                }
+                
+                const shutterTypeMatch = targetCameras.some(camera => 
+                    isShutterTypeCompatible(originalParams.shutterType, camera.shutterType)
+                );
+                if (!shutterTypeMatch) {
+                    analysis.push({
+                        parameter: '快门类型',
+                        description: `嘉励相机中没有与 ${originalParams.shutterType} 相同的快门类型`
+                    });
+                }
+                
+                const pixelMatch = targetCameras.some(camera => 
+                    isPixelCompatible(originalParams.pixel, camera.pixel, false)
+                );
+                if (!pixelMatch) {
+                    analysis.push({
+                        parameter: '像素',
+                        description: `嘉励相机中没有与 ${originalParams.pixel} 万像素相近（10%误差内）的相机`
+                    });
+                }
+            }
+            
+            return analysis;
+        }
+
+        // 获取参数显示名称
+        function getParameterDisplayName(key) {
+            const names = {
+                pixel: currentCameraType === 'line' ? '像素(K)' : '像素(万)',
+                targetSize: '靶面尺寸',
+                pixelSize: '像元尺寸',
+                shutterType: '快门类型',
+                resolution: '分辨率',
+                maxFrameRate: currentCameraType === 'line' ? '最大行频' : '最大帧率',
+                dataInterface: '数据接口',
+                color: '黑白｜彩色',
+                lensInterface: '镜头接口'
+            };
+            return names[key] || key;
+        }
+
+        // 重置参数
+        function resetParameters() {
+            sourceBrandSelect.value = '';
+            sourceModelInput.value = '';
+            pixelInput.value = '';
+            targetSizeSmallInput.value = '';
+            targetSizeWidthInput.value = '';
+            targetSizeHeightInput.value = '';
+            pixelSizeInput.value = '';
+            shutterTypeSelect.value = '';
+            resolutionWidthInput.value = '';
+            resolutionHeightInput.value = '';
+            maxFrameRateInput.value = '';
+            dataInterfaceSelect.value = '';
+            colorSelect.value = '';
+            lensInterfaceSelect.value = '';
+            resultContainer.innerHTML = '<p class="no-match"><i class="fas fa-info-circle"></i><br>请输入参数后点击"查找替换相机"</p>';
+            
+            // 隐藏错误提示
+            hideErrors();
+        }
+
+        // 事件监听
+        replaceBtn.addEventListener('click', findReplacementCameras);
+        replaceBtnParams.addEventListener('click', findReplacementCameras);
+        resetBtn.addEventListener('click', resetParameters);
+        resetParamsBtn.addEventListener('click', resetParameters);
+        
+        // 模态框事件监听
+        modalOkBtn.addEventListener('click', function() {
+            hideModal(modelNotFoundModal);
+            // 滚动到相机参数区域
+            paramsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 聚焦到靶面尺寸输入框
+            setTimeout(() => {
+                if (currentTargetSizeMode === 'small') {
+                    targetSizeSmallInput.focus();
+                } else {
+                    targetSizeWidthInput.focus();
+                }
+            }, 500);
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            if (event.target === modelNotFoundModal) {
+                hideModal(modelNotFoundModal);
+            }
+        });
+
+        // 初始化
+        initCameraTypeSelection();
+        initTargetSizeModeSelection();
+        initBrandSelection();
+        updateUILabels();
+        updateBrandOptions();
+        updateModelSuggestions();
+    </script>
+</body>
+</html>
