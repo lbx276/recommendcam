@@ -43,35 +43,13 @@
             border-radius: 16px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
-            position: relative;
         }
         
-        /* Logo样式 */
-        .logo-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-        }
-        
-        .logo {
-            height: 60px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        }
-        
-        /* 为header添加左侧内边距，为logo腾出空间 */
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 30px 25px 30px 100px; /* 左侧内边距增加 */
+            padding: 30px 25px;
             text-align: center;
-            position: relative;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
         
         h1 {
@@ -760,17 +738,6 @@
         }
         
         @media (max-width: 768px) {
-            .logo-container {
-                position: static;
-                text-align: center;
-                margin-bottom: 15px;
-            }
-            
-            header {
-                padding: 20px 15px;
-                min-height: auto;
-            }
-            
             .brand-selection {
                 grid-template-columns: 1fr;
             }
@@ -845,12 +812,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo容器 -->
-        <div class="logo-container">
-            <!-- 这里使用占位符logo，实际使用时替换为"嘉励Logo-纵向-白色.png" -->
-            <img src="./嘉励Logo-纵向-白色.png" alt="嘉励Logo" class="logo">
-        </div>
-        
         <header>
             <h1><i class="fas fa-camera-retro"></i> 苏州嘉励相机替换助手</h1>
             <p class="description">选择源相机或手动输入参数，系统将智能推荐兼容的嘉励相机替换型号</p>
@@ -1101,7 +1062,7 @@
         </div>
         
         <footer>
-            <p>苏州嘉励自动化科技有限公司 &copy; 2025 | 嘉励相机替换助手</p>
+            <p>嘉励相机替换助手 &copy; 2025 | 工业视觉系统解决方案</p>
         </footer>
     </div>
 
@@ -1122,7 +1083,7 @@
     </div>
 
     <script>
-const cameraBrands = {
+   const cameraBrands = {
             // 面阵相机数据
             area: {
                 hikvision: {
@@ -1163,26 +1124,27 @@ const cameraBrands = {
                         { model: "MV-CS200-10GC", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472 × 3648", maxFrameRate: "5.9 fps", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" }
                     ]
                 },
-                // 华睿面阵相机数据
-				huarui: {
+  				huarui: {
 					name: "华睿面阵相机",
 					cameras: [
-						// 从Excel表格转换的数据
-						{ model: "A7040MK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7040CK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5201MK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5201CK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7300MK200", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "188", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7500MK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7500CK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7500MK402", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "37.2", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7900CK401", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "27", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7A20MK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7A20CK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7A21MK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7A21CK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "Camera Link", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7A21MK200", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "56", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5B57MK200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "Camera Link", color: "黑白", lensInterface: "C-Mount" },
+						// CameraLink 接口 (K)
+						{ model: "A7040MK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7040CK402", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "349", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5201MK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5201CK402", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "37.8", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7300MK200", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "188", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500MK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CK200", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "150", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MK402", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "37.2", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CK401", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "27", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CK401", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "20", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A21MK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A21CK401", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "18", dataInterface: "CameraLink", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A21MK200", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "56", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5B57MK200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "CameraLink", color: "黑白", lensInterface: "C-Mount" },
+
+						// GigE 接口 (G)
 						{ model: "AH3B00MG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "10", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
 						{ model: "AH3B00CG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "10", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "AH7040MG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "315", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
@@ -1209,100 +1171,108 @@ const cameraBrands = {
 						{ model: "AH7B4ACG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "7", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "AH5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "7", dataInterface: "GigE", color: "黑白", lensInterface: "C-Mount" },
 						{ model: "AH5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "7", dataInterface: "GigE", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH3600MG000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH3600CG000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH3A20MG000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH3A20CG000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH3B00MG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH3B00CG000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7040MG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7040CG000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7160MG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7160CG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH5200MG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH5200CG000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH5207MG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH5207CG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7500MG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7500CG000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7A20MG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7A20CG000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7B0AMG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7B0ACG000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH7B4AMG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH7B4ACG000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AH5B57MGV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AH5B57CGV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5051MG545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5051CG545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A3135MG000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A3135CG000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A3138MG000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A3138CG000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A3139MG000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A3139CG000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+
+						// USB3.0 接口 (U)
+						{ model: "AH3600MU000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3600CU000", pixel: "600", targetSize: "1/1.8", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "3072×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH3A20MU000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3A20CU000E", pixel: "1200", targetSize: "1/1.7", pixelSize: "1.85μm", shutterType: "Rolling", resolution: "4024×3036", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH3B00MU000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH3B00CU000", pixel: "2000", targetSize: "1", pixelSize: "2.4μm", shutterType: "Rolling", resolution: "5472×3648", maxFrameRate: "19.2", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7040MU000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7040CU000", pixel: "40", targetSize: "1/2.9", pixelSize: "6.9μm", shutterType: "Global", resolution: "720×540", maxFrameRate: "526.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7160MU000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7160CU000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249.1", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5200MU000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5200CU000", pixel: "200", targetSize: "2/3", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5207MU000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5207CU000", pixel: "200", targetSize: "1/1.7", pixelSize: "4μm", shutterType: "Global", resolution: "2048×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7500MU000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7500CU000", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7A20MU000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7A20CU000", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B0AMU000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B0ACU000", pixel: "2000", targetSize: "1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4504×4504", maxFrameRate: "18", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH7B4AMU000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH7B4ACU000", pixel: "2440", targetSize: "1.2", pixelSize: "2.74μm", shutterType: "Global", resolution: "5328×4608", maxFrameRate: "15", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AH5B57MU200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5B57CU200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						
+						// USB3.0×2 接口 (V)
+						{ model: "AH5B57MV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AH5B57CV200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "30", dataInterface: "USB3.0×2", color: "彩色", lensInterface: "C-Mount" },
+
+						// 更多 USB3.0 接口相机
+						{ model: "A5051MU545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5051CU545", pixel: "50", targetSize: "1/3.6", pixelSize: "4.8μm", shutterType: "Global", resolution: "800×600", maxFrameRate: "545", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3135MU000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3135CU000", pixel: "130", targetSize: "1/3", pixelSize: "3.75μm", shutterType: "Global", resolution: "1280×960", maxFrameRate: "33", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3138MU000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3138CU000", pixel: "130", targetSize: "1/2.7", pixelSize: "4μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "201", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A3139MU000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A3139CU000", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "210", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A5131MU001", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
 						{ model: "A5131MU210", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "208", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
 						{ model: "A5131CU210", pixel: "130", targetSize: "1/2", pixelSize: "4.8μm", shutterType: "Global", resolution: "1280×1024", maxFrameRate: "208", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7160MG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7160CG000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5200MG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5200CG000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5201MG150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5201CG150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7200MG001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7200CG001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7200MG130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7200CG130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7230MG000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7230CG000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7201MG000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7201CG000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7160MU000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7160CU000", pixel: "160", targetSize: "1/2.9", pixelSize: "3.45μm", shutterType: "Global", resolution: "1440×1080", maxFrameRate: "249", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5200MU000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5200CU000", pixel: "200", targetSize: "1/1.7", pixelSize: "4.5μm", shutterType: "Global", resolution: "1624×1240", maxFrameRate: "89", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5201MU150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5201CU150", pixel: "230", targetSize: "2/3", pixelSize: "4.8μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "150", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7200MU001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7200CU001", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "38.7", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7200MU130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7200CU130", pixel: "230", targetSize: "1/1.2", pixelSize: "5.86μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "164", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7230MU000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7230CU000", pixel: "230", targetSize: "1/2.3", pixelSize: "3.45μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "167", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7201MU000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7201CU000", pixel: "230", targetSize: "1/2.2", pixelSize: "3.2μm", shutterType: "Global", resolution: "1920×1200", maxFrameRate: "72", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A7300CU001", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "55", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7300MG90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7300CG90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5402MG90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5402CG90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A5501MG60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5501CG60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7500MG35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7500CG35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7300MU90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7300CU90", pixel: "300", targetSize: "1/1.8", pixelSize: "3.45μm", shutterType: "Global", resolution: "2048×1536", maxFrameRate: "120", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5402MU90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5402CU90", pixel: "400", targetSize: "1", pixelSize: "5.5μm", shutterType: "Global", resolution: "2048×2048", maxFrameRate: "90", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A5501MU60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5501CU60", pixel: "500", targetSize: "1", pixelSize: "4.8μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "60", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MU35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CU35", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A7500CU201", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "68", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7500MG75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7500CG75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7500MU75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7500CU75", pixel: "500", targetSize: "2/3", pixelSize: "3.45μm", shutterType: "Global", resolution: "2448×2048", maxFrameRate: "75", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A7501MU001", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "43", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7501MG000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7501CG000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7501MU000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7501CU000", pixel: "500", targetSize: "2/3", pixelSize: "3.2μm", shutterType: "Global", resolution: "2592×2048", maxFrameRate: "71", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A780AMU000", pixel: "800", targetSize: "2/3", pixelSize: "2.74μm", shutterType: "Global", resolution: "2840×2840", maxFrameRate: "47", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7900MG200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7900CG200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7900MG201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7900CG201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7A20MG201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7A20CG201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7900MU200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CU200", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "40", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7900MU201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7900CU201", pixel: "900", targetSize: "1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×2160", maxFrameRate: "32", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MU201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CU201", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30.5", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
 						{ model: "A7A21MU200", pixel: "1200", targetSize: "1", pixelSize: "3.2μm", shutterType: "Global", resolution: "4096×3072", maxFrameRate: "28.6", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
 						{ model: "A7A2AMU000", pixel: "1200", targetSize: "1/1.1", pixelSize: "2.74μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "31", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "A7A20MG30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "A7A20CG30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AX7A20MG250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX7A20CG250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
-						{ model: "AX5B57MG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "C-Mount" },
-						{ model: "AX5B57CG200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "C-Mount" },
-						{ model: "AX5B57MG250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX5B57CG250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
-						{ model: "AX5B51MG250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX5B51CG250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
-						{ model: "AX5E07MG250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX5E07CG250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
-						{ model: "AX5F57MG250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX5F57CG250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "A5B57MU200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A5B57CU200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "14", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "A7A20MU30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "A7A20CU30", pixel: "1200", targetSize: "1/1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "30", dataInterface: "USB3.0", color: "彩色", lensInterface: "C-Mount" },
+
+						// 10GigE 接口 (T)
+						{ model: "AX7A20MT250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX7A20CT250", pixel: "1200", targetSize: "1.1", pixelSize: "3.45μm", shutterType: "Global", resolution: "4096×3000", maxFrameRate: "68", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5B57MT200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "C-Mount" },
+						{ model: "AX5B57CT200", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "C-Mount" },
+						{ model: "AX5B57MT250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5B57CT250", pixel: "2500", targetSize: "1.1", pixelSize: "2.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "41", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5B51MT250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5B51CT250", pixel: "2500", targetSize: "23.0×23.0", pixelSize: "4.5μm", shutterType: "Global", resolution: "5120×5120", maxFrameRate: "43", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5E07MT250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5E07CT250", pixel: "5000", targetSize: "22.4×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "7008×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
+						{ model: "AX5F57MT250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
+						{ model: "AX5F57CT250", pixel: "6500", targetSize: "29.9×22.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "9344×7000", maxFrameRate: "17.4", dataInterface: "10GigE", color: "彩色", lensInterface: "M58" },
 						{ model: "AX5K37MT250", pixel: "10300", targetSize: "36.1×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "11264×9200", maxFrameRate: "11.25", dataInterface: "10GigE", color: "黑白", lensInterface: "M58" },
-						{ model: "AX7Q27MG470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
-						{ model: "AX7Q27CG470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "彩色", lensInterface: "M72" }
+						{ model: "AX7Q27MT470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "黑白", lensInterface: "M72" },
+						{ model: "AX7Q27CT470", pixel: "15200", targetSize: "53.0×29.4", pixelSize: "3.2μm", shutterType: "Global", resolution: "16552×9200", maxFrameRate: "7.6", dataInterface: "10GigE", color: "彩色", lensInterface: "M72" }
 					]
 				},
                 jiali: {
@@ -1486,6 +1456,7 @@ const cameraBrands = {
 				}
             }
         };
+
         // DOM元素
         const sourceBrandSelect = document.getElementById('source-brand');
         const sourceModelInput = document.getElementById('source-model');
@@ -1608,7 +1579,7 @@ const cameraBrands = {
             }
         }
 
-        // 设置靶面尺寸值
+        // 设置靶面尺寸值 - 修复靶面尺寸自动填充问题
         function setTargetSizeValue(value) {
             if (!value) return;
             
@@ -1634,6 +1605,15 @@ const cameraBrands = {
                     targetSizeWidthInput.value = parts[0].trim();
                     targetSizeHeightInput.value = parts[1].trim();
                 }
+            }
+            // 处理像"1.2"这样的靶面尺寸值
+            else if (/^\d+(\.\d+)?$/.test(value)) {
+                // 切换到小靶面模式
+                const smallModeBtn = document.querySelector('.target-size-mode-btn[data-mode="small"]');
+                if (smallModeBtn && !smallModeBtn.classList.contains('active')) {
+                    smallModeBtn.click();
+                }
+                targetSizeSmallInput.value = value;
             }
         }
 
@@ -2096,7 +2076,7 @@ const cameraBrands = {
                         // 填充参数
                         pixelInput.value = camera.pixel;
                         
-                        // 设置靶面尺寸
+                        // 设置靶面尺寸 - 使用修复后的函数
                         setTargetSizeValue(camera.targetSize);
                         
                         pixelSizeInput.value = camera.pixelSize;
